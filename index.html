@@ -277,6 +277,52 @@ nav {
 .proj-stat { font-family: var(--mono); color: var(--accent); font-size: 0.78rem; margin-bottom: 1rem; background: rgba(26,115,232,0.05); padding: 0.4rem 0.75rem; border-radius: 6px; }
 .proj-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .proj-stack span { background: rgba(255,255,255,0.8); color: var(--muted); padding: 0.15rem 0.55rem; border-radius: 4px; font-size: 0.7rem; font-family: var(--mono); border: 1px solid var(--border); }
+.proj-links { display: flex; gap: 0.6rem; margin-top: auto; }
+.proj-links a {
+  display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.5rem 1rem; border-radius: 8px;
+  font-size: 0.78rem; font-family: var(--mono); font-weight: 500; transition: all 0.2s; text-decoration: none;
+}
+.proj-links a.btn-live { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.proj-links a.btn-live:hover { background: var(--accent2); border-color: var(--accent2); transform: translateY(-2px); }
+.proj-links a.btn-code { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+.proj-links a.btn-code:hover { border-color: var(--accent); background: rgba(26,115,232,0.05); transform: translateY(-2px); }
+
+/* Project detail modal */
+.proj-modal-overlay {
+  position: fixed; inset: 0; z-index: 1000; background: rgba(13,33,71,0.6); backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center; padding: 2rem;
+}
+.proj-modal-overlay.active { display: flex; }
+.proj-modal {
+  background: var(--card); border-radius: 20px; max-width: 720px; width: 100%; max-height: 85vh; overflow-y: auto;
+  padding: 2.5rem; box-shadow: 0 24px 80px rgba(0,0,0,0.3); border: 1.5px solid var(--border); position: relative;
+}
+.proj-modal-close {
+  position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.8); border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center;
+  justify-content: center; font-size: 1.2rem; color: var(--muted); transition: all 0.2s;
+}
+.proj-modal-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.proj-modal h2 { font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; }
+.proj-modal-subtitle { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+.proj-modal h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin: 1.75rem 0 0.75rem; }
+.proj-modal ul { list-style: none; padding: 0; }
+.proj-modal li { color: var(--muted); font-size: 0.85rem; line-height: 1.8; padding-left: 1.5rem; position: relative; }
+.proj-modal li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); }
+.proj-modal-features { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.proj-modal-features span {
+  background: rgba(26,115,232,0.06); color: var(--accent); padding: 0.3rem 0.8rem; border-radius: 8px;
+  font-size: 0.75rem; font-family: var(--mono); border: 1px solid rgba(26,115,232,0.15);
+}
+.proj-modal-actions { display: flex; gap: 0.75rem; margin-top: 2rem; }
+.proj-modal-actions a {
+  display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border-radius: 10px;
+  font-size: 0.85rem; font-weight: 600; transition: all 0.2s; text-decoration: none;
+}
+.proj-modal-actions a.btn-live { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+.proj-modal-actions a.btn-live:hover { background: var(--accent2); border-color: var(--accent2); transform: translateY(-2px); }
+.proj-modal-actions a.btn-code { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+.proj-modal-actions a.btn-code:hover { border-color: var(--accent); background: rgba(26,115,232,0.05); transform: translateY(-2px); }
 
 /* ── EXPERIENCE PAGE ── */
 .timeline { position: relative; padding-left: 2.25rem; }
@@ -671,6 +717,20 @@ footer span { color: var(--cyan); }
         <div class="section-divider"></div>
       </div>
       <div class="projects-grid">
+        <div class="proj-card" style="border-color: rgba(26,115,232,0.3);">
+          <div class="proj-badge" style="background: rgba(26,115,232,0.1); border-color: rgba(26,115,232,0.3); color: var(--accent);">✦ Featured</div>
+          <h3>ReloCompass — AI Global Relocation Platform</h3>
+          <p>Full-stack AI-powered platform helping international students and professionals relocate abroad. Features AI relocation assistant, accommodation hub, job matching with employer portal, budget planner, transportation guides, relocation checklists, and community hub.</p>
+          <div class="proj-stat">🧭 Next.js 16 · TypeScript · Prisma · MySQL · AI Chatbot</div>
+          <div class="proj-stack"><span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Prisma</span><span>MySQL</span><span>OpenAI API</span><span>NextAuth</span></div>
+          <div class="proj-links">
+            <a href="https://relocompass-tpfpaa.drytis.dev/" target="_blank" class="btn-live">▶ Live Demo</a>
+            <a href="https://github.com/jh-prakhar/ReloCompass_App" target="_blank" class="btn-code">⌨ GitHub</a>
+          </div>
+          <div style="margin-top: 0.75rem;">
+            <a href="#" onclick="openProjectDetail(); return false;" style="font-size: 0.78rem; font-family: var(--mono); color: var(--accent); text-decoration: none;">View details →</a>
+          </div>
+        </div>
         <div class="proj-card"><div class="proj-badge">✦ Deployed</div><h3>AI Text Summarizer Web App</h3><p>Fine-tuned Google's T5 Transformer for abstractive summarization. Full-stack GenAI app with FastAPI backend and Gradio UI — handles research papers, legal docs, and medical reports in real time.</p><div class="proj-stat">🤗 T5 Transformer · FastAPI · Gradio · safetensors</div><div class="proj-stack"><span>PyTorch</span><span>HuggingFace</span><span>FastAPI</span><span>Gradio</span><span>Python</span></div></div>
         <div class="proj-card"><div class="proj-badge">✦ Production-Ready</div><h3>Lung Disease Classification — CNN</h3><p>Custom CNN on 5,856 chest X-rays (MedMNIST). 1.00 recall on Pneumonia — near-zero missed diagnoses. Full pipeline from DataLoader to confusion matrix evaluation.</p><div class="proj-stat">📈 97.14% val accuracy · 0.99 precision · 1.00 Pneumonia recall</div><div class="proj-stack"><span>PyTorch</span><span>MedMNIST</span><span>Scikit-learn</span><span>Matplotlib</span></div></div>
         <div class="proj-card"><div class="proj-badge">✦ Deployed</div><h3>Smart Card Customer Segmentation</h3><p>Unsupervised clustering on Smart Card customer data. Used Kneed for optimal cluster selection and silhouette analysis, revealing distinct behavioral personas for marketing strategy.</p><div class="proj-stat">📊 K-Means · Elbow Method · Silhouette Analysis</div><div class="proj-stack"><span>Pandas</span><span>Scikit-learn</span><span>K-Means</span><span>Seaborn</span></div></div>
@@ -1032,5 +1092,51 @@ function sendEmail(event) {
     btn.disabled       = false;
   });
 }
+
+// ── Project detail modal ──
+function openProjectDetail() {
+  document.getElementById('projModalOverlay').classList.add('active');
+}
+function closeProjectDetail() {
+  document.getElementById('projModalOverlay').classList.remove('active');
+}
 </script>
+
+<!-- Project Detail Modal -->
+<div class="proj-modal-overlay" id="projModalOverlay" onclick="if(event.target===this)closeProjectDetail()">
+  <div class="proj-modal">
+    <button class="proj-modal-close" onclick="closeProjectDetail()">✕</button>
+    <div class="proj-badge" style="background: rgba(26,115,232,0.1); border-color: rgba(26,115,232,0.3); color: var(--accent); margin-bottom: 1rem;">✦ Featured Project</div>
+    <h2>ReloCompass — AI Global Relocation Platform</h2>
+    <p class="proj-modal-subtitle">An AI-powered relocation platform that helps international students and professionals moving abroad by providing accommodation guidance, transportation information, employer connections, job opportunities, and personalized AI assistance.</p>
+
+    <h3>Technology Stack</h3>
+    <div class="proj-modal-features">
+      <span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Node.js</span><span>Prisma ORM</span><span>MySQL</span><span>OpenAI API</span><span>AI Chatbot</span><span>NextAuth</span><span>Framer Motion</span>
+    </div>
+
+    <h3>Problem Solved</h3>
+    <p style="color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin-bottom: 0.5rem;">International students and professionals relocating abroad often face significant challenges, including:</p>
+    <ul>
+      <li>Finding safe and affordable accommodation before arrival.</li>
+      <li>Understanding public transportation in a new country.</li>
+      <li>Locating legitimate part-time and full-time employment opportunities.</li>
+      <li>Connecting with verified employers.</li>
+      <li>Managing relocation tasks without a centralized platform.</li>
+      <li>Avoiding scams related to housing and jobs.</li>
+      <li>Accessing trusted relocation information in one place.</li>
+    </ul>
+    <p style="color: var(--navy); font-size: 0.85rem; line-height: 1.7; margin-top: 0.75rem; font-weight: 500;">ReloCompass addresses these problems by providing an AI-powered platform that combines relocation planning, accommodation support, job discovery, employer connections, and personalized guidance into one seamless experience.</p>
+
+    <h3>Key Features</h3>
+    <div class="proj-modal-features">
+      <span>AI Relocation Assistant</span><span>Smart Job Matching</span><span>Accommodation Discovery</span><span>Employer Dashboard</span><span>Student Dashboard</span><span>Transportation Guidance</span><span>Interactive AI Chat</span><span>Responsive Web App</span><span>Mobile App Support</span><span>Secure Authentication</span><span>Personalized Recommendations</span>
+    </div>
+
+    <div class="proj-modal-actions">
+      <a href="https://relocompass-tpfpaa.drytis.dev/" target="_blank" class="btn-live">▶ Live Demo</a>
+      <a href="https://github.com/jh-prakhar/ReloCompass_App" target="_blank" class="btn-code">⌨ GitHub Repository</a>
+    </div>
+  </div>
+</div>
 </html>
